@@ -66,8 +66,14 @@ int main(int argc, char **argv)
     }*/
     
     cout << "\ncalling constructor...";
-    BigInt bi = BigInt(34500);
+    BigInt bi1 = BigInt(34500);
+    BigInt bi2 = BigInt(12345);
     cout << "\nPrinting Digits...\n";
-    bi.printDigits();
+    bi1.printDigits();
+    bi2.printDigits();
+
+    //BigInt bi3 = BigInt::add(bi1, bi2);
+    //bi3.printDigits();
+
     cout << "\nProgram completed.\n\n";
 }

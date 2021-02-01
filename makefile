@@ -1,19 +1,30 @@
 CC = g++
 H = BigInt.h 
-C = asn1.cpp BigInt.cpp
-EXEC = asn1_a
+CA = asn1_a.cpp BigInt.cpp
+CB = asn1_b.cpp BigInt.cpp
+EXECA = asn1_a
+EXECB = asn1_b
 
 build: ${C} ${H}
-	${CC} ${C} -o ${EXEC}
+	${CC} ${CA} -o ${EXECA}
+	${CC} ${CB} -o ${EXECB}
 
-test:
-	./${EXEC}
+testA:
+	./${EXECA}
+
+testB:
+	./${EXECB}
 
 clean:
 	@echo "Cleaning up..."
-	rm ${EXEC} *.o -v -f
+	rm ${EXECA} ${EXECB} *.o -v -f
 
-run:
+runA:
 	make clean
 	make
-	make test
+	make testA
+
+runB:
+	make clean
+	make
+	make testB

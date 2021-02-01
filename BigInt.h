@@ -15,8 +15,11 @@ class BigInt
         BigInt(int value);
         //BigInt(BigInt v1, BigInt v2)
 
-        BigInt add (BigInt operand1, BigInt operand2);
+        int getDigitCapacity();
+
+        BigInt static add (BigInt operand1, BigInt operand2);
         void printDigits();
+
 };
 
 #endif
