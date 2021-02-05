@@ -10,7 +10,7 @@ using namespace std;
 
 BigInt::BigInt()
 {
-    //std::cout << "\nin constructor";
+    //std::std::cout << "\nin constructor";
     intValue = 0;
 
     for(int i = 0; i < digitCapacity; i++)
@@ -21,7 +21,7 @@ BigInt::BigInt()
 
 BigInt::BigInt(int value)
 {
-    //std::cout << "\nin constructor";
+    //std::std::cout << "\nin constructor";
     intValue = value;
 
     for(int i = 0; i < digitCapacity; i++)
@@ -33,9 +33,9 @@ BigInt::BigInt(int value)
     int digit;
     int stringSize = digitString.size();
 
-    //std::cout << "\nString Size: " << stringSize;
-    //std::cout << "\ns[0]: " << digitString[0];
-    //std::cout << "\n";
+    //std::std::cout << "\nString Size: " << stringSize;
+    //std::std::cout << "\ns[0]: " << digitString[0];
+    //std::std::cout << "\n";
 
     for (int i = stringSize - 1, j=digitCapacity-1 ; 0 <= i ; i--, j--)
     {
@@ -105,11 +105,11 @@ BigInt BigInt::multiply(BigInt factor1, BigInt factor2, BigInt product)//maybe p
 }
 
 /*  Implements Anatoly Karatsuba's divide and conquer recursive algorithm for multiplication
-    p is lowest index, r is max index of subproblem*/
+    p is lowest index, r is max index of subproblem.  Not fully debugged,*/
 BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
 {
     //BigInt b, c, e1, e2, e, f, g;
-    cout << "\nEntering karatsuba";
+    std::cout << "\nEntering karatsuba";
     std::cout << "\trec f1: ";
     factor1.printDigits();
     std::cout << "\trec f2: ";
@@ -118,33 +118,33 @@ BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
 
     if(r-p==1)
     {
-        cout << "\tbase branch";
+        std::cout << "\tbase branch";
         int b = factor1.digits[p]*factor2.digits[p]; //multiply the tens
-        //cout << "\nb: " << b;
+        //std::cout << "\nb: " << b;
         int c = factor1.digits[r]*factor2.digits[r]; //multiply the ones
-        //cout << "\nc: " << c;
+        //std::cout << "\nc: " << c;
 
         int e1 = factor1.digits[p] + factor1.digits[r];
-        //cout << "\ne1: " << e1;
+        //std::cout << "\ne1: " << e1;
         int e2 = factor2.digits[p] + factor2.digits[r];
-        //cout << "\ne2: " << e2;
+        //std::cout << "\ne2: " << e2;
 
         int e = (e1) * (e2) ;//multiply the sums
-        //cout << "\ne: " << e;
+        //std::cout << "\ne: " << e;
 
         int f = e-b-c;
-        //cout << "\nf: " << f;
+        //std::cout << "\nf: " << f;
 
         int g = 100*b+10*f+c;
-        cout << "\nBase g: " << g;
+        std::cout << "\nBase g: " << g;
 
         return BigInt(100*b+10*f+c);
     }
-    else //recursion
+    else if(r-p>1) //recursion
     {
-        cout << "\nrecursive branch";
+        std::cout << "\trecursive branch";
         int q = (p+r)/2;
-        cout << "\nq: " << q;
+        std::cout << "\nq: " << q;
 
         int digCap = factor1.getDigitCapacity(); //TODO maybe remove and get maxIndex w/o storing digCap
         int maxIndex = digCap - 1;
@@ -154,62 +154,142 @@ BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
 
         /* code */
         BigInt b = karatsuba(factor1, factor2, p, q);
-        cout << "\nrec b: ";
+        std::cout << "\nrec b: ";
         b.printDigits();
 
         BigInt c = karatsuba(factor1, factor2, q+1, r);
-        cout << "\nrec c: ";
+        std::cout << "\nrec c: ";
         c.printDigits();
 
         BigInt factor1LeftHalf, factor2LeftHalf, factor1RightHalf, factor2RightHalf;
         for (int i = p, j=maxIndex-maxLeft; i <= p+maxLeft; i++, j++)
         {
-            cout << "\ni: " << i << "\tj: " << j;
+            std::cout << "\ni: " << i << "\tj: " << j;
             factor1LeftHalf.setDigit(j, factor1.digits[i]);
             factor2LeftHalf.setDigit(j, factor2.digits[i]);
         }
-        cout << "\nrec f1lh: ";
+        std::cout << "\nrec f1lh: ";
         factor1LeftHalf.printDigits();
-        cout << "\nrec f2lh: ";
+        std::cout << "\nrec f2lh: ";
         factor2LeftHalf.printDigits();
         
-
-        for(int srcI = q+1, dstI = digCap-minRight; srcI <= r ; srcI++, dstI++)
+        int dstI;
+        std::cout << "\nminRight: " << minRight;
+        std::cout << "\n q" << q;
+        for(int srcI = q+1, dstI = q+1; srcI <= r ; srcI++, dstI++)
         {
-            cout << "\nsrcI: " << srcI << "\tdstI: " << dstI;
+            std::cout << "\nsrcI: " << srcI << "\tdstI: " << dstI;
             factor1RightHalf.setDigit(dstI , factor1.digits[srcI]);
             factor2RightHalf.setDigit(dstI , factor2.digits[srcI]);
         }
-        cout << "\nrec f1rh: ";
+        std::cout << "\nrec f1rh: ";
         factor1RightHalf.printDigits();
-        cout << "\nrec f2rh: ";
+        std::cout << "\nrec f2rh: ";
         factor2RightHalf.printDigits();
 
         BigInt d1 = BigInt::add(factor1LeftHalf, factor1RightHalf);
+        std::cout << "\nrec d1: ";
+        d1.printDigits();
         BigInt d2 = BigInt::add(factor2LeftHalf, factor2RightHalf);
+        std::cout << "\nrec d2: ";
+        d2.printDigits();
 
         BigInt e;
-        if (d1.digits[maxIndex - range -1] == 0)
+        if (d1.digits[p+maxLeft] == 0)
         {
-            e = BigInt::karatsuba(d1, d2, maxIndex -  minRight, maxIndex);
+            std::cout << "\nno overflow";
+            e = BigInt::karatsuba(d1, d2, q+1, r);
         }
         else
         {
-            e = BigInt::karatsuba(d1, d2, minRight-1, maxIndex);
+            std::cout << "\nyes overflow";
+            e = BigInt::karatsuba(d1, d2, q, r);
         }
         
         BigInt ftmp = BigInt::add(b, c);
         BigInt f = BigInt::subtract(e,ftmp);
+        std::cout << "\nrec f: ";
+        f.printDigits();
+
 
         BigInt g;
-        g.digits[maxIndex] = c.digits[maxIndex];
-        g.digits[maxIndex-1] = c.digits[maxIndex-1]+f.digits[maxIndex];
-        for(int i = (maxIndex-2); 0<=i ; i--)
+        int gDig;
+        gDig = c.digits[maxIndex];
+        g.digits[maxIndex] = gDig;
+        std::cout << "\ngDig: " << gDig;
+
+        gDig = c.digits[maxIndex-1];
+        g.digits[maxIndex-1] = gDig;
+        std::cout << "\ngDig: " << gDig;
+
+        bool carry = false;
+
+        gDig = c.digits[maxIndex-2]+f.digits[maxIndex];
+        if(gDig >= 10)
         {
-            g.digits[i] = c.digits[i]+f.digits[i+1]+b.digits[i+2];
+            g.digits[maxIndex-2] = gDig%10;
+            carry = true;
+        }
+        else
+        {
+            g.digits[maxIndex-2] = gDig%10;
+            carry = false;
+        }
+        std::cout << "\ngDig: " << gDig;
+
+        gDig = c.digits[maxIndex-3]+f.digits[maxIndex-1];
+        if(carry)
+        {
+            gDig+=1;
+        }
+        if(gDig >= 10)
+        {
+            g.digits[maxIndex-3] = gDig%10;
+            carry = true;
+        }
+        else
+        {
+            g.digits[maxIndex-3] = gDig%10;
+            carry = false;
+        }
+        std::cout << "\ngDig: " << gDig;
+
+        for(int i = (maxIndex-4); 0<=i ; i--)
+        {
+            gDig = c.digits[i]+f.digits[i+2]+b.digits[i+4];
+            if(carry)
+            {
+                gDig += 1;
+            }
+            if (gDig >= 10)
+            {
+                g.digits[i] = gDig%10;
+                carry = true;
+            }
+            else
+            {
+                g.digits[i] = gDig;
+                carry = false;
+            }
         }
 
-        return g; //dummy value
+        std::cout << "\nReturning g: ";
+        g.printDigits();
+        return g;
+    }
+    else if(r==p)
+    {
+        std::cout << "\n1 digit range";
+        
+        int retDig = factor1.digits[p] * factor2.digits[p];
+
+        BigInt ret = BigInt(retDig);
+
+        return ret;
+    }
+    else
+    {
+        cout << "\nERROR!  range < 0 ?";  //throw exception?
     }
 }
 

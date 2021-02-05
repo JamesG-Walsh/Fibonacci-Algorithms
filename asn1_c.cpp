@@ -62,14 +62,24 @@ int main(int argc, char **argv)
 
     //Fibonacci::fibB(500000, 50000);
 
-    BigInt a = BigInt(2531);
+    BigInt a = BigInt(2531); 
     BigInt b = BigInt(1467);
 
+    BigInt d = BigInt(5075); 
+    BigInt e = BigInt(1467);
+
     BigInt c = BigInt(0);
-    //c = BigInt::multiply(a, b, c);
+    BigInt f;
+
     c = BigInt::karatsuba(a, b, 1020, 1023);
+
+    f = BigInt::karatsuba(d, e, 1020, 1023);
+
     cout<<"\n Result: ";
     c.printDigits();
+
+    cout<<"\n Result: ";
+    f.printDigits();
 
     cout << "\n\nProgram completed.\n\n";
     return 0;
