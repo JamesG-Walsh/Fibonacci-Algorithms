@@ -59,9 +59,13 @@ int main(int argc, char **argv)
 
     //Fibonacci::fibB(20, 1);
 
-    Fibonacci::fibB(500, 20);
+    Fibonacci::fibB(500, 20);//requires 120 digits
 
-    //Fibonacci::fibB(500000, 50000);
+    Fibonacci::fibB(100000, 20000); //requires 21000 digits
+
+    //Fibonacci::fibB(500000, 50000); 
+
+    //Fibonacci::fibB(1000000, 250000); requires 210k digits
 
     cout << "\n\nProgram completed.\n\n";
     return 0;

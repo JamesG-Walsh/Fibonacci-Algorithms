@@ -290,6 +290,7 @@ BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
     else
     {
         cout << "\nERROR!  range < 0 ?";  //throw exception?
+        return BigInt(-1);
     }
 }
 

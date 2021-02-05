@@ -8,8 +8,8 @@ class BigInt
 {
     protected:
         int intValue;
-        int digitCapacity = 1024; //big enough for Fibonacci(500), can easily be adjusted higher.  Should keep as power of 2 for simplicity of karasuba
-        int digits[1024]; //linked list might be better as it would dynamically scale to the needed size
+        int digitCapacity = 21000; //big enough for Fibonacci(500), can easily be adjusted higher.  Should keep as power of 2 for simplicity of karasuba
+        int digits[21000]; //linked list might be better as it would dynamically scale to the needed size
         
         void populateDigits();
 
