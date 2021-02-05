@@ -29,7 +29,7 @@ class Fibonacci
             {
                 cout << "\nF(1)\t= " << 1;
             }
-            if(n==1 || n==0)
+            if(n==0 || n==1)
             {
                 return BigInt(n);
             }                   
@@ -38,7 +38,6 @@ class Fibonacci
             BigInt prev2 = BigInt(0);
             for (int i = 2; i<=n ; i++)
             {
-                //cout << "Start: For i=" << i << "\t sum=" << sum<< "\t prevA=" << prevA << "\t prevB=" << prevB << "\t tmp=" << tmp;
                 sum = BigInt::add(prev1, prev2);
                 prev2 = prev1;
                 prev1 = sum;
@@ -59,9 +58,18 @@ int main(int argc, char **argv)
 
     //Fibonacci::fibB(20, 1);
 
-    Fibonacci::fibB(500, 20);
+    //Fibonacci::fibB(500, 20);
 
     //Fibonacci::fibB(500000, 50000);
+
+    BigInt a = BigInt(2531);
+    BigInt b = BigInt(1467);
+
+    BigInt c = BigInt(0);
+    //c = BigInt::multiply(a, b, c);
+    c = BigInt::karatsuba(a, b, 1020, 1023);
+    cout<<"\n Result: ";
+    c.printDigits();
 
     cout << "\n\nProgram completed.\n\n";
     return 0;

@@ -1,3 +1,6 @@
+//CS3340      Winter 2021 Assignment 1
+//James Walsh jwalsh57    250481718
+
 #include "BigInt.h"
 
 #include <iostream>
@@ -6,7 +9,7 @@ using namespace std;
 class Fibonacci
 {
     public:
-        static long fibA(int n)
+        static unsigned long long fibA(int n)
         {
             if(n>1)
             {
@@ -19,7 +22,7 @@ class Fibonacci
             return -1; //error
         }
 
-        static unsigned long long fibB(int n)
+        /*static unsigned long long fibB(int n)
         { 
             if(n==0 || n==1)
             {
@@ -38,45 +41,18 @@ class Fibonacci
                 prevB = prevA;
                 prevA = sum;
             }
-            return prevA;
-        }
+            return sum;
+        }*/
 };
 
 int main(int argc, char **argv)
 {
-    cout << "\nEntering main()";
-    /*
-    for(int i = 0; i <= 8; i++)
-    {
-        //cout << "F(" << i*5 << ")\t= " << Fibonacci::fibA(i*5) << "\n";
-    }
-
-    cout << "\n";
-
-    for(int i = 0; i<100; i++)
-    {
-        //cout << "F(" << i << ")\t= " << Fibonacci::fibB(i) << "\n";
-    }
-
-    cout << "\n";
-
-    for(int i = 0; i <= 25; i++)
-    {
-        //cout << "F(" << i*20 << ")\t= " << Fibonacci::fibB(i*20) << "\n";
-    }*/
+    cout << "\nEntering main()\n";
     
-    //cout << "\ncalling constructor...";
-    BigInt bi1 = BigInt(9999);
-    BigInt bi2 = BigInt(4);
-    cout << "\nPrinting Digits...\n";
-    bi1.printDigits();
-    cout << "\n";
-    bi2.printDigits();
-
-    BigInt bi3 = BigInt(4);
-    bi3.printDigits();
-    bi3 = BigInt::add(bi1, bi2);
-    bi3.printDigits();
+    for(int i = 0; i <= 10; i++)
+    {
+        cout << "F(" << i*5 << ")\t= " << Fibonacci::fibA(i*5) << "\n";
+    }
 
     cout << "\nProgram completed.\n\n";
 }
