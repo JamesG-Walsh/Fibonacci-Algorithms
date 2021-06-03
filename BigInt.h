@@ -9,8 +9,8 @@ class BigInt
     protected:
         int intValue;
         int digitCapacity = 21000; //big enough for Fibonacci(500), can easily be adjusted higher.  Should keep as power of 2 for simplicity of karasuba
-        int digits[21000]; //linked list might be better as it would dynamically scale to the needed size
-        
+        int digits[21000]; //std::vector<int> might be better as it would dynamically scale to the needed size.  Or abandon decimal entirely and just use binary...would need to be able to translate back to decimal...
+
         void populateDigits();
 
     public:
