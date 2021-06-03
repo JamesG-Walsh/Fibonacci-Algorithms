@@ -23,7 +23,7 @@ class Fibonacci
         }
 
         static BigInt fibB(int n, int printMultiple)
-        { 
+        {
             cout << "\nF(0)\t= " << 0;
             if(printMultiple == 1)
             {
@@ -32,7 +32,7 @@ class Fibonacci
             if(n==1 || n==0)
             {
                 return BigInt(n);
-            }                   
+            }
             BigInt sum = BigInt(1);
             BigInt prev1 = BigInt(1);
             BigInt prev2 = BigInt(0);
@@ -57,13 +57,24 @@ int main(int argc, char **argv)
 {
     cout << "\nEntering main()\n";
 
+    cout << "argc: " << argc;
+
+    if(argc == 3)
+    {
+      int target = atoi(argv[1]);
+      int printFactor = atoi(argv[2]);
+      Fibonacci::fibB(target, printFactor);
+    }
+    else
+    {
+      Fibonacci::fibB(500, 20);//requires 120 digits
+    }
+
     //Fibonacci::fibB(20, 1);
 
-    Fibonacci::fibB(500, 20);//requires 120 digits
+    //Fibonacci::fibB(100000, 20000); //requires 21,000 digits
 
-    Fibonacci::fibB(100000, 20000); //requires 21000 digits
-
-    //Fibonacci::fibB(500000, 50000); 
+    //Fibonacci::fibB(500000, 50000);
 
     //Fibonacci::fibB(1000000, 250000); requires 210k digits
 

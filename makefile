@@ -31,6 +31,9 @@ testA:
 testB:
 	time ./${EXECB}
 
+testB_flex:
+	time ./${EXECB} 100000 20000
+
 testC:
 	time ./${EXECC}
 
@@ -43,6 +46,11 @@ runB:
 	make clean
 	make
 	make testB
+
+runB_flex:
+	make clean
+	make
+	make testB_flex
 
 runC:
 	make clean
