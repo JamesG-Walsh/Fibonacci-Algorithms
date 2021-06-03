@@ -83,7 +83,7 @@ BigInt BigInt::multiply(BigInt factor1, BigInt factor2, BigInt product)//maybe p
     {
         digit1 = factor1.digits[i];
         digit2 = factor2.digits[i];
-        
+
         digitProd = digit1*digit2;
         digitProd += carry;
         carry = 0;
@@ -172,7 +172,7 @@ BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
         factor1LeftHalf.printDigits();
         std::cout << "\nrec f2lh: ";
         factor2LeftHalf.printDigits();
-        
+
         int dstI;
         std::cout << "\nminRight: " << minRight;
         std::cout << "\n q" << q;
@@ -205,7 +205,7 @@ BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
             std::cout << "\nyes overflow";
             e = BigInt::karatsuba(d1, d2, q, r);
         }
-        
+
         BigInt ftmp = BigInt::add(b, c);
         BigInt f = BigInt::subtract(e,ftmp);
         std::cout << "\nrec f: ";
@@ -280,7 +280,7 @@ BigInt BigInt::karatsuba(BigInt factor1, BigInt factor2, int p, int r)
     else if(r==p)
     {
         std::cout << "\n1 digit range";
-        
+
         int retDig = factor1.digits[p] * factor2.digits[p];
 
         BigInt ret = BigInt(retDig);
@@ -329,7 +329,7 @@ void BigInt::printDigits()
 
     for (int i = 0; i < digitCapacity; i++)
     {
-        if (digits[i] != 0)
+        if (digits[i] != 0) //TODO would prefer to have smarter logic here and avoid checking this after printing starts but this works.  Not high priority
         {
             startPrinting = true; //only start printing after iterating through leading 0s
         }
